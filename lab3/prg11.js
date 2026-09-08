@@ -28,7 +28,7 @@ const server = http.createServer((req, res) => {
 
         // send back the status
         res.end(JSON.stringify({message: 'Product added successfully', product: product, status: 201}));
-
+f
         res.end('add Page');
     }
     else if (req.url === '/product' && req.method === 'PUT')
