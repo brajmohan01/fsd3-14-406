@@ -1,52 +1,64 @@
-import http from 'http';
-// import * as teams from './teams.js';
-import { getAllTeams, addTeam, getTeamById } from './teams.js';
-import {parse as parseUrl} from 'url';
+import http from "http";
+import { getAllTeams, addTeam } from "./teams.js";
+import { parse as parseUrl } from "url";
 
-const PORT = 5001;
-const sendJson = (res , statusCode, data) => {
-    res.writeHead(statusCode, {'Content-Type': 'application/json'});
-    res.end(data === "undefined" ? "" : JSON.stringify(data));
-}
+const PORT = process.env.PORT || 5002;
 
-const parseJSONbody = (req) => {
-    return new Promise((resolve, reject) => {
-        let body = '';
-        req.on('data', chunk => {
-            body += chunk.toString();
-        });
-        req.on('end', () => {
-            try {
-                resolve(body ? JSON.parse(body) : {});
-            } catch (error) {
-                reject(error);
-            }
-        });
-        
+const sendJson = (res, statusCode, data) => {
+  res.writeHead(statusCode, { "Content-Type": "application/json" });
+  res.end(data === undefined ? "" : JSON.stringify(data));
+};
+
+const parseJSONBody = (req) => {
+  return new Promise((resolve, reject) => {
+    let body = "";
+    req.on("data", (chunk) => {
+      body += chunk.toString();
     });
+    req.on("end", () => {
+      try {
+        resolve(body ? JSON.parse(body) : {});
+      } catch (error) {
+        reject(error);
+      }
+    });
+    req.on("error", reject);
+  });
 };
 
 const server = http.createServer(async (req, res) => {
-    const {pathname, query} = parseUrl(req.url, true);
-    const { method } = req;
-    console.log('pathname:', pathname, 'query:', query,'Method:', req.method);
+  const { pathname, query } = parseUrl(req.url, true);
+  const { method } = req;
+  console.log("pathname:", pathname);
+  console.log("query:", query);
+  console.log("Method:", method);
 
-    if(pathname === 'api/v1/teams' && req.method === 'GET'){
-        let teams = getAllTeams();
-        return sendJson(res, 200, teams,"count" , teams.length);
+  if (pathname === "/api/v1/teams" && method === "GET") {
+    const teams = getAllTeams();
+    return sendJson(res, 200, { count: teams.length, data: teams });
+  }
 
-    }else if(pathname === 'api/v1/teams' && req.method === 'POST'){
-        const newTeam = await parseJSONbody(req);
-        const team = addTeam(newTeam);
-        return sendJson(res, 201, team);
+  if (pathname === "/api/v1/teams" && method === "POST") {
+    const body = await parseJSONBody(req);
+    const { tname, tl, members } = body;
 
-
-    }else{
-        res.statusCode = 404;
+    if (!tname || !tl || !members) {
+      return sendJson(res, 400, {
+        error: "Team Name, Team Leader, or Members not defined",
+      });
     }
-    res.end();
+
+    const team = addTeam({ tname, tl, members });
+    return sendJson(res, 201, {
+      message: "Team registered successfully",
+      data: team,
+    });
+  }
+
+  res.statusCode = 404;
+  res.end();
 });
 
-server.listen(PORT, () =>{
-    console.log(`Server is running on port ${PORT}`);
+server.listen(PORT, () => {
+  console.log("SIH Server Is Running at", PORT);
 });
