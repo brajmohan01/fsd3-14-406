@@ -1,12 +1,12 @@
 import http from "http";
-import { getAllTeams, addTeam } from "./teams.js";
+import { getAllTeams, addTeam, getTeamById } from "./teams.js";
 import { parse as parseUrl } from "url";
 
-const PORT = process.env.PORT || 5002;
+const PORT = 5002;
 
-const sendJson = (res, statusCode, data) => {
-  res.writeHead(statusCode, { "Content-Type": "application/json" });
-  res.end(data === undefined ? "" : JSON.stringify(data));
+const sendJson = (res, statusCode, data, keyword, msg) => {
+  res.writeHead(statusCode, { "content-type": "application/json" });
+  res.end(data === "undefined" ? "" : JSON.stringify({ [keyword]: msg, data }));
 };
 
 const parseJSONBody = (req) => {
@@ -34,31 +34,42 @@ const server = http.createServer(async (req, res) => {
   console.log("Method:", method);
 
   if (pathname === "/api/v1/teams" && method === "GET") {
-    const teams = getAllTeams();
-    return sendJson(res, 200, { count: teams.length, data: teams });
-  }
 
-  if (pathname === "/api/v1/teams" && method === "POST") {
-    const body = await parseJSONBody(req);
-    const { tname, tl, members } = body;
+    let teams = getAllTeams();
+    return sendJson(res, 200, teams, "count", teams.length);
 
-    if (!tname || !tl || !members) {
+  } 
+  
+  else if (pathname === "/api/v1/teams" && method == "POST") {
+
+    const { tname, tl, members } = await parseJSONBody(req);
+    if (!tname || !tl || !members)
       return sendJson(res, 400, {
         error: "Team Name, Team Leader, or Members not defined",
       });
-    }
-
     const team = addTeam({ tname, tl, members });
-    return sendJson(res, 201, {
-      message: "Team registered successfully",
-      data: team,
-    });
-  }
 
-  res.statusCode = 404;
-  res.end();
+    return sendJson(res, 201, team, "Message", "Team registered successfully");
+
+  } 
+  
+  
+  
+  else if (pathname.startsWith("/api/v1/teams/") && method === "GET") {
+    const id = Number(pathname.split("/").pop());
+    const team = getTeamById(id);
+
+    if (!team)
+      return sendJson(res, 400, {
+        error: `Team with id: ${id} not found`,
+      });
+    return sendJson(res, 200, team, "Message", "Team Found");
+  } else {
+    res.statusCode = 404;
+    res.end("Not matching");
+  }
 });
 
 server.listen(PORT, () => {
-  console.log("SIH Server Is Running at", PORT);
+  console.log("SIH Server is running at ", PORT);
 });
