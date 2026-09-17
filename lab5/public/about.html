@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About ISRO | Indian Space Research Organisation</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #050816;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        nav {
+            height: 72px;
+            padding: 0 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(5, 8, 22, 0.95);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .logo span {
+            color: #4da3ff;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #bbb;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #fff;
+        }
+
+        .hero {
+            min-height: 430px;
+            padding: 100px 7%;
+            display: flex;
+            align-items: center;
+            background:
+                radial-gradient(circle at 80% 30%, rgba(40,120,255,.22), transparent 35%),
+                radial-gradient(circle at 20% 80%, rgba(100,40,255,.15), transparent 35%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .tag {
+            color: #58a6ff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: clamp(42px, 7vw, 76px);
+            line-height: 1.05;
+            margin: 15px 0 25px;
+        }
+
+        .hero p {
+            color: #aeb6c5;
+            max-width: 680px;
+            font-size: 18px;
+        }
+
+        section {
+            padding: 80px 7%;
+        }
+
+        .section-title {
+            font-size: 38px;
+            margin-bottom: 18px;
+        }
+
+        .section-description {
+            color: #9da7b8;
+            max-width: 800px;
+            margin-bottom: 45px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .card {
+            padding: 30px;
+            border-radius: 18px;
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,.07),
+                rgba(255,255,255,.025)
+            );
+            border: 1px solid rgba(255,255,255,.1);
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #9da7b8;
+        }
+
+        .number {
+            color: #58a6ff;
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .timeline {
+            max-width: 900px;
+            margin-top: 40px;
+            border-left: 2px solid #2684ff;
+            padding-left: 35px;
+        }
+
+        .timeline-item {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            background: #2684ff;
+            border-radius: 50%;
+            position: absolute;
+            left: -42px;
+            top: 8px;
+        }
+
+        .timeline-year {
+            color: #58a6ff;
+            font-weight: bold;
+        }
+
+        footer {
+            padding: 35px 7%;
+            border-top: 1px solid rgba(255,255,255,.1);
+            color: #7f899a;
+            text-align: center;
+        }
+
+        @media (max-width: 800px) {
+            nav ul {
+                gap: 15px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 0 5%;
+            }
+
+            section,
+            .hero {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+        }
+
+        @media (max-width: 550px) {
+            nav {
+                height: auto;
+                padding: 20px 5%;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">ISRO<span>◉</span></div>
+
+        <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/about.html" class="active">About</a></li>
+            <li><a href="/enquiry.html">Enquiry</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <section class="hero">
+            <div class="hero-content">
+                <div class="tag">Indian Space Research Organisation</div>
+
+                <h1>
+                    Exploring Space.<br>
+                    Serving India.
+                </h1>
+
+                <p>
+                    ISRO is India's national space agency, dedicated to the
+                    development and application of space technology for
+                    national development and scientific exploration.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">About ISRO</h2>
+
+            <p class="section-description">
+                The Indian Space Research Organisation develops space
+                technologies and applications covering communication,
+                navigation, earth observation, meteorology, space science
+                and planetary exploration.
+            </p>
+
+            <div class="grid">
+
+                <div class="card">
+                    <div class="number">01</div>
+                    <h3>Space Technology</h3>
+                    <p>
+                        Developing launch vehicles, satellites and advanced
+                        space systems for a wide range of applications.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="number">02</div>
+                    <h3>Scientific Research</h3>
+                    <p>
+                        Studying the Earth, Moon, planets and the wider
+                        universe through scientific missions.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="number">03</div>
+                    <h3>National Development</h3>
+                    <p>
+                        Applying space technology to communication,
+                        agriculture, disaster management and other areas.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Journey Through Time</h2>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <div class="timeline-year">1969</div>
+                    <h3>ISRO Established</h3>
+                    <p>
+                        The Indian Space Research Organisation was established
+                        to develop India's space programme.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">1975</div>
+                    <h3>First Indian Satellite</h3>
+                    <p>
+                        Aryabhata became India's first satellite.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">1980</div>
+                    <h3>First Indian Launch Vehicle Success</h3>
+                    <p>
+                        SLV-3 successfully placed the Rohini satellite
+                        into orbit.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2014</div>
+                    <h3>Mars Orbiter Mission</h3>
+                    <p>
+                        India's Mars Orbiter Mission successfully entered
+                        Mars orbit.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-year">2023</div>
+                    <h3>Chandrayaan-3</h3>
+                    <p>
+                        Chandrayaan-3 successfully achieved a soft landing
+                        on the lunar surface.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        © 2026 ISRO — Indian Space Research Organisation
+    </footer>
+
+</body>
+</html>
