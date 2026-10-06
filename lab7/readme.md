@@ -33,3 +33,5 @@ any component include styles
 then apply with stle attribute and pass the object 
 in this method we use 2 curly braces {{}} to pass the object into style attribute ,all the css porperty must be single word 
 for eg : text-align => textAlign
+
+app.jsx should contain minimun code to run the app faster

@@ -1,3 +1,4 @@
+import Fruit from "./components/Fruit.jsx";
 import Pen from "./components/Pen.jsx";
 
 const b1 = {
@@ -33,7 +34,7 @@ function Book(props) {
   const { picUrl, bname, price, quantity, rating } = props.book;
   return (
     <div>
-      <img src={picUrl} alt={bname} srcset="" />
+      <img src={picUrl} alt={bname} />
       <h1>{bname}</h1>
       <h2>Price : {price}</h2>
       <h3>Quantity : {quantity}</h3>
@@ -51,6 +52,7 @@ export default function App() {
         <Book book={b2} />
         <Pen pen={p1} />
         <Pen pen={p2} />
+        <Fruit />
       </div>
     </>
   );

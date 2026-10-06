@@ -11,7 +11,7 @@ const Pen = (props) => {
     }
     return (
         <div>
-            <img src={penImg} alt={penComp} srcset="" />
+            <img src={penImg} alt={penComp} srcSet="" />
             <h1>{penComp}</h1>
             <h2>Price : {penPrice}</h2>
         </div>
