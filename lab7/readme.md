@@ -35,3 +35,5 @@ in this method we use 2 curly braces {{}} to pass the object into style attribut
 for eg : text-align => textAlign
 
 app.jsx should contain minimun code to run the app faster
+
+bydefault button in html is submit button , to avoid this we need to add type="button" in button tag

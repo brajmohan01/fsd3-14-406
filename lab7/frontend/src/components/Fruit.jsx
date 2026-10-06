@@ -7,11 +7,14 @@ const products = [
     { title:"Banana", id:4, isFruit:true },
 ];
 
-const ListItem = products.map((item) => (<li key={item.id}>{item.title}</li>));
+const ListItem = products.map((item) => (
+<li key={item.id} style={{color: item.isFruit ? "red" : "green"}}>
+    {item.title}
+</li>));
 // console.log(ListItem);  
 const Fruit = () => {
   return (
-    <ul>
+    <ul style={{color:"red"}}>
         {ListItem}
     </ul>
   )

@@ -1,3 +1,4 @@
+import Event from "./components/Event.jsx";
 import Fruit from "./components/Fruit.jsx";
 import Pen from "./components/Pen.jsx";
 
@@ -53,6 +54,7 @@ export default function App() {
         <Pen pen={p1} />
         <Pen pen={p2} />
         <Fruit />
+        <Event />
       </div>
     </>
   );
